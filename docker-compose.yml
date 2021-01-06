@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  postgres_cadastro:
+    container_name: rango_cadastro
+    image: postgres:12.2
+    environment:
+      POSTGRES_USER: rango_cadastro
+      POSTGRES_PASSWORD: rango_cadastro
+    ports:
+      - "5431:5432"
