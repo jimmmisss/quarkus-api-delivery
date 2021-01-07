@@ -1,6 +1,7 @@
 package com.github.jimmmisss.rango.cadastro;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -14,6 +15,7 @@ import static javax.ws.rs.core.Response.Status.CREATED;
 @Path("/restaurantes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Tag(name = "Restaurante")
 public class RestauranteResource {
 
     @GET
