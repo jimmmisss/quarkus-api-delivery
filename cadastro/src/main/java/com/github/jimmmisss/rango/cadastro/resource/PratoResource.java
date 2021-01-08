@@ -1,13 +1,22 @@
-package com.github.jimmmisss.rango.cadastro;
+package com.github.jimmmisss.rango.cadastro.resource;
 
+import com.github.jimmmisss.rango.cadastro.dto.PratoMapper;
+import com.github.jimmmisss.rango.cadastro.dto.input.PratoInput;
+import com.github.jimmmisss.rango.cadastro.dto.input.PratoUpdateInput;
+import com.github.jimmmisss.rango.cadastro.dto.output.PratoOutput;
+import com.github.jimmmisss.rango.cadastro.entity.Prato;
+import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static javax.ws.rs.core.Response.Status.CREATED;
 
@@ -17,36 +26,32 @@ import static javax.ws.rs.core.Response.Status.CREATED;
 @Tag(name = "Prato")
 public class PratoResource {
 
+    @Inject
+    PratoMapper pratoMapper;
+
     @GET
     @Path("{idRestaurante}/pratos")
-    public List<Prato> buscaPratos(@PathParam("idRestaurante") Long idRestaurante) {
-        return Prato.list("restaurante", getRestaurante(idRestaurante));
+    public List<PratoOutput> buscaPratos(@PathParam("idRestaurante") Long idRestaurante) {
+        Stream<Prato> restaurante = Prato.stream("restaurante", getRestaurante(idRestaurante));
+        return restaurante.map(pratoMapper::toPratoOutput).collect(Collectors.toList());
     }
 
     @POST
     @Path("idRestaurante/pratos")
     @Transactional
-    public Response salva(@PathParam("idRestaurante") Long idRestaurante, Prato dto) {
-        Prato prato = new Prato();
-        prato.nome = dto.nome;
-        prato.descricao = dto.descricao;
-        prato.preco = dto.preco;
-        prato.restaurante = getRestaurante(idRestaurante);
-        dto.persist();
+    public Response salva(@PathParam("idRestaurante") Long idRestaurante, PratoInput pratoInput) {
+        getRestaurante(idRestaurante);
+        Prato prato = pratoMapper.toPrato(pratoInput);
+        prato.persist();
         return Response.status(CREATED).build();
     }
 
     @PUT
     @Path("{idRestaurante}/pratos/{idPrato}")
     @Transactional
-    public void atualiza(@PathParam("idRestaurante") Long idRestaurante,
-                         @PathParam("idPrato") Long idPrato, Prato dto) {
+    public void atualiza(@PathParam("idRestaurante") Long idRestaurante, @PathParam("idPrato") Long idPrato, PratoUpdateInput pratoUpdateInput) {
         getRestaurante(idRestaurante);
-        Prato prato = getPrato(idPrato);
-        prato.nome = dto.nome;
-        prato.descricao = dto.descricao;
-        prato.preco = dto.preco;
-        prato.persist();
+        pratoMapper.toPrato(pratoUpdateInput, getPrato(idPrato)).persist();
     }
 
     @DELETE

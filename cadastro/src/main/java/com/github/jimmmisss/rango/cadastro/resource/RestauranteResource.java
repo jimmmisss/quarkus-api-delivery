@@ -1,9 +1,10 @@
-package com.github.jimmmisss.rango.cadastro;
+package com.github.jimmmisss.rango.cadastro.resource;
 
 import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteInput;
 import com.github.jimmmisss.rango.cadastro.dto.RestauranteMapper;
 import com.github.jimmmisss.rango.cadastro.dto.output.RestauranteOutput;
 import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteUpdateInput;
+import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
@@ -47,7 +48,7 @@ public class RestauranteResource {
     public void update(@PathParam("id") Long id, RestauranteUpdateInput restauranteUpdateInput) {
         Optional<Restaurante> restauranteResult = Restaurante.findByIdOptional(id);
         if (restauranteResult.isEmpty()) {
-            throw new NotFoundException();
+            throw new NotFoundException("Restaurante não existe.");
         }
         Restaurante restaurante = restauranteMapper.toRestaurante(restauranteUpdateInput, restauranteResult.get());
         restaurante.persist();
@@ -59,7 +60,7 @@ public class RestauranteResource {
     public void update(@PathParam("id") Long id) {
         Optional<Restaurante> restauranteResult = Restaurante.findByIdOptional(id);
         restauranteResult.ifPresentOrElse(Restaurante::delete, () -> {
-            throw new NotFoundException();
+            throw new NotFoundException("Restaurante não existe.");
         });
     }
 }

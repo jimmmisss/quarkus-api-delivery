@@ -1,6 +1,6 @@
 package com.github.jimmmisss.rango.cadastro.dto;
 
-import com.github.jimmmisss.rango.cadastro.Restaurante;
+import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
 import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteInput;
 import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteUpdateInput;
 import com.github.jimmmisss.rango.cadastro.dto.output.RestauranteOutput;

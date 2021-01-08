@@ -1,4 +1,4 @@
-package com.github.jimmmisss.rango.cadastro;
+package com.github.jimmmisss.rango.cadastro.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
