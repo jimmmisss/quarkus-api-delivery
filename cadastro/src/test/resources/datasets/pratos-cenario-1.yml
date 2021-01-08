@@ -1,0 +1,12 @@
+prato:
+  - ID: 100
+    NOME: Prime Rib
+    DESCRICAO: Prato muito bom
+    VALOR: 155.75
+    RESTAURANTE: 123
+  - ID: 1001
+    NOME: Filé ao molho madeira
+    DESCRICAO: Ótimo para jantar entre amigos
+    VALOR: 80.20
+    RESTAURANTE: 123
+

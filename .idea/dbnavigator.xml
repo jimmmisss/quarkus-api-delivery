@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="51c104c2-50bb-42b7-bb21-672dd162ad2e">
-        <schema name="public" object-types="function, view, sequence, table" />
+        <schema name="public" object-types="function, constraint, dataset trigger, table, column, sequence, index, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -39,6 +39,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="51c104c2-50bb-42b7-bb21-672dd162ad2e" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="51c104c2-50bb-42b7-bb21-672dd162ad2e" dataset="public.prato" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="51c104c2-50bb-42b7-bb21-672dd162ad2e" dataset="public.restaurante" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
