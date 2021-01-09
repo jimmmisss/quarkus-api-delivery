@@ -1,8 +1,7 @@
 package com.github.jimmmisss.rango.cadastro.resource;
 
-import com.github.jimmmisss.rango.cadastro.dto.PratoMapper;
+import com.github.jimmmisss.rango.cadastro.dto.mapper.PratoMapper;
 import com.github.jimmmisss.rango.cadastro.dto.input.PratoInput;
-import com.github.jimmmisss.rango.cadastro.dto.input.PratoUpdateInput;
 import com.github.jimmmisss.rango.cadastro.dto.output.PratoOutput;
 import com.github.jimmmisss.rango.cadastro.entity.Prato;
 import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
@@ -49,9 +48,9 @@ public class PratoResource {
     @PUT
     @Path("{idRestaurante}/pratos/{idPrato}")
     @Transactional
-    public void atualiza(@PathParam("idRestaurante") Long idRestaurante, @PathParam("idPrato") Long idPrato, PratoUpdateInput pratoUpdateInput) {
+    public void atualiza(@PathParam("idRestaurante") Long idRestaurante, @PathParam("idPrato") Long idPrato, PratoInput pratoInput) {
         getRestaurante(idRestaurante);
-        pratoMapper.toPrato(pratoUpdateInput, getPrato(idPrato)).persist();
+        pratoMapper.toPrato(pratoInput, getPrato(idPrato)).persist();
     }
 
     @DELETE

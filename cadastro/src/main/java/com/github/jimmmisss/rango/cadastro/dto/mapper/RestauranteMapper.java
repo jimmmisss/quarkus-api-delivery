@@ -1,8 +1,7 @@
-package com.github.jimmmisss.rango.cadastro.dto;
+package com.github.jimmmisss.rango.cadastro.dto.mapper;
 
 import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
 import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteInput;
-import com.github.jimmmisss.rango.cadastro.dto.input.RestauranteUpdateInput;
 import com.github.jimmmisss.rango.cadastro.dto.output.RestauranteOutput;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,7 +14,7 @@ public interface RestauranteMapper {
     Restaurante toRestaurante(RestauranteInput restauranteInput);
 
     @Mapping(target = "nome", source = "nomeFantasia")
-    Restaurante toRestaurante(RestauranteUpdateInput restauranteUpdateInput, @MappingTarget Restaurante restaurante);
+    Restaurante toRestaurante(RestauranteInput restauranteInput, @MappingTarget Restaurante restaurante);
 
     RestauranteOutput toRestauranteOutput(Restaurante restaurante);
 
