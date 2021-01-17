@@ -5,6 +5,9 @@ import com.github.jimmmisss.rango.cadastro.dto.mapper.RestauranteMapper;
 import com.github.jimmmisss.rango.cadastro.dto.output.RestauranteOutput;
 import com.github.jimmmisss.rango.cadastro.entity.Restaurante;
 import com.github.jimmmisss.rango.cadastro.infra.ConstraintViolationResponse;
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.SimplyTimed;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -41,6 +44,9 @@ public class RestauranteResource {
     RestauranteMapper restauranteMapper;
 
     @GET
+    @Counted(name = "Quantidade de busca Restaurantes")
+    @SimplyTimed(name = "Tempo simples de busca")
+    @Timed(name = "Tempo completo da busca")
     public List<RestauranteOutput> listaRestaurantes() {
         List<Restaurante> restaurantes = Restaurante.listAll();
         return restaurantes.stream().map(restauranteMapper::toRestauranteOutput)
