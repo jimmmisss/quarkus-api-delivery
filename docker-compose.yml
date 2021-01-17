@@ -8,3 +8,11 @@ services:
       POSTGRES_PASSWORD: rango_cadastro
     ports:
       - "5431:5432"
+  keycloak_rango:
+    container_name: keycloak_rango
+    image: jboss/keycloak:9.0.2
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8180:8080"
